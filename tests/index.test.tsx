@@ -1,8 +1,9 @@
 import { render as r, fireEvent, waitFor } from "@testing-library/react";
 import api from "../utils/api";
 import Dashboard from "../pages/index";
-import { UserProviderTest, UserContextState } from "../store/user";
+import { UserProviderTest } from "../store/user";
 import { useRouter } from "next/router";
+import { IUserContext } from "../types";
 
 jest.mock("next/router", () => ({
   __esModule: true,
@@ -14,15 +15,12 @@ describe("Dashboard", () => {
 
   const render = (id = "") => {
     const Store = ({ children }) => {
-      const context: UserContextState = {
+      const context: IUserContext = {
         user: {
           id,
-          name: "Sam",
           email: "",
           password: "",
-          team: "Users",
         },
-        updateUser: () => {},
       };
 
       return <UserProviderTest value={context}>{children}</UserProviderTest>;
@@ -48,30 +46,20 @@ describe("Dashboard", () => {
 
     expect(getByLabelText("Password")).toBeInTheDocument();
     expect(getByLabelText("Email")).toBeInTheDocument();
-    expect(getByLabelText("Name")).toBeInTheDocument();
-    expect(getByLabelText("Team")).toBeInTheDocument();
   });
 
   it("validates the form", async () => {
-    const { getByText, getByPlaceholderText, getByLabelText } = render("1");
+    const { getByText, getByPlaceholderText } = render("1");
 
     const emailInput = getByPlaceholderText("Email");
     const passwordInput = getByPlaceholderText("Password");
-    const teamSelect = getByLabelText("Team");
 
     fireEvent.blur(emailInput);
     fireEvent.blur(passwordInput);
 
-    fireEvent.change(teamSelect, {
-      target: { value: "not supported option" },
-    });
-
-    fireEvent.blur(teamSelect);
-
     await waitFor(() => {
       expect(getByText("Password required")).toBeInTheDocument();
       expect(getByText("Email required")).toBeInTheDocument();
-      expect(getByText("Team required")).toBeInTheDocument();
     });
 
     fireEvent.change(passwordInput, {
@@ -92,25 +80,17 @@ describe("Dashboard", () => {
   it("submits the data", async () => {
     const { getByText, getByPlaceholderText, getByLabelText } = render("5");
 
-    const nameInput = getByPlaceholderText("Name");
     const emailInput = getByPlaceholderText("Email");
     const passwordInput = getByPlaceholderText("Password");
-    const teamSelect = getByLabelText("Team");
 
     fireEvent.blur(emailInput);
     fireEvent.blur(passwordInput);
 
-    fireEvent.change(nameInput, {
-      target: { value: "Sam Ojling" },
-    });
     fireEvent.change(emailInput, {
       target: { value: "sam@ojling.com" },
     });
     fireEvent.change(passwordInput, {
       target: { value: "123456" },
-    });
-    fireEvent.change(teamSelect, {
-      target: { value: "Users" },
     });
 
     const button = getByText("Save");
@@ -132,7 +112,7 @@ describe("Dashboard", () => {
 
     fetchMock.mockResponseOnce(JSON.stringify(formData));
 
-    api("/update/5", "PUT", formData).then((data) => {
+    api("/update/5", formData).then((data) => {
       expect(data).toEqual({
         id: "5",
         email: "test@test.com",

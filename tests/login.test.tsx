@@ -1,8 +1,9 @@
 import { render as r, fireEvent, waitFor } from "@testing-library/react";
 import api from "../utils/api";
 import Login from "../pages/login";
-import { UserProviderTest, UserContextState } from "../store/user";
+import { UserProviderTest } from "../store/user";
 import { useRouter } from "next/router";
+import { IUserContext } from "../types";
 
 jest.mock("next/router", () => ({
   __esModule: true,
@@ -12,15 +13,12 @@ jest.mock("next/router", () => ({
 describe("Login", () => {
   const render = () => {
     const Store = ({ children }) => {
-      const context: UserContextState = {
+      const context: IUserContext = {
         user: {
           id: "",
-          name: "",
           email: "",
           password: "",
-          team: "",
         },
-        updateUser: () => {},
       };
 
       return <UserProviderTest value={context}>{children}</UserProviderTest>;
@@ -98,7 +96,7 @@ describe("Login", () => {
     const formData = { email: "sam@ojling.com", password: "123456" };
     fetchMock.mockResponseOnce(JSON.stringify(formData));
 
-    api("/login", "POST", formData).then((data) => {
+    api("/login", formData).then((data) => {
       expect(data).toEqual({ email: "sam@ojling.com", password: "123456" });
     });
 
