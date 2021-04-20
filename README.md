@@ -7,10 +7,16 @@ The page is using MirageJS to stub the API, and then I keep track of the user in
 ### Libaries used:
 
 - NextJS
-- Formik
-- Yup
-- Typescript
-- Jest
-- React Testing Library
-- TailwindCSS
-- MirageJS
+- Formik (form state and validation)
+- Yup (validation library)
+- Typescript (type safety)
+- Jest (assertion library)
+- React Testing Library (testing utility)
+- TailwindCSS (css utility)
+- MirageJS (stub API)
+
+### Demo
+
+To test login use credentials (email: sam@ojling.com, password: Password1)
+
+- [Decent @ vercel](https://decent.vercel.app/)
