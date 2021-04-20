@@ -1,6 +1,6 @@
 import { render as r, fireEvent, waitFor } from "@testing-library/react";
 import api from "../utils/api";
-import Dashboard from "../pages/index";
+import Dashboard from "../pages/dashboard";
 import { UserProviderTest } from "../store/user";
 import { useRouter } from "next/router";
 import { IUserContext } from "../types";
