@@ -3,13 +3,15 @@ async function api(
   body: { [key: string]: string },
 ): Promise<any> {
   try {
-    const response = { body: "stub", ok: 200, message: "" };
+    const response = await fetch(path, {
+      method: "POST",
+      body: JSON.stringify(body),
+    });
 
-    if (!response?.ok) {
-      throw new Error(response?.message);
-    }
+    if (!response.ok) throw Error(response.statusText);
+    const json = await response.json();
 
-    return response;
+    return json;
   } catch (err) {
     const error = err.message
       ? err

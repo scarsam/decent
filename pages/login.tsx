@@ -42,7 +42,7 @@ const Login: React.VFC = () => {
         handleSubmit={onSubmit}
         initalValues={initalValues}
         validationSchema={sessionValidationSchema}
-        render={(errors, touched) => (
+        render={(errors, touched, handleChange) => (
           <>
             {error && <ServerError message={error} />}
             <TextField
@@ -51,6 +51,7 @@ const Login: React.VFC = () => {
               placeholder="Email"
               label="Email"
               isInvalid={touched.email && errors.email}
+              handleChange={handleChange}
               errorMessage={errors.email}
             />
 
@@ -61,6 +62,7 @@ const Login: React.VFC = () => {
               label="Password"
               isInvalid={touched.password && errors.password}
               errorMessage={errors.password}
+              handleChange={handleChange}
               helperText={
                 <p>
                   Can't remember?{" "}
