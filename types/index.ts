@@ -11,6 +11,11 @@ import React from "react";
 export type UserValidationTypes = typeof userValidationSchema;
 export type SessionValidationTypes = typeof sessionValidationSchema;
 
+export interface INotification {
+  message: string;
+  autoDeleteTime: number;
+}
+
 export interface IPassword {
   hasLength: boolean;
   hasNumber: boolean;

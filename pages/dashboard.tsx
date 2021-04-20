@@ -4,6 +4,7 @@ import { useUserStore } from "../store/user";
 import Head from "next/head";
 import PageLayout from "../layout/PageLayout";
 import Link from "../components/Link";
+import Notification from "../components/Notification";
 
 export default function Home() {
   const router = useRouter();
@@ -25,8 +26,8 @@ export default function Home() {
         <title>Decent | Dashboard - Sam Ojling</title>
         <link rel="icon" href="/decent-favicon.png" />
       </Head>
-
       <h1 className="text-5xl mb-10">Member Portal</h1>
+      <Notification message="Yay! Welcome to Decent!" autoDeleteTime={5000} />
       <p>
         Hi {user?.email} you're in! Unless you want to{" "}
         <Link
