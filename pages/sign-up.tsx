@@ -100,7 +100,7 @@ const Signup: React.VFC = () => {
               <Button>Create my account</Button>
             </span>
             <p>
-              Not ready yet? <Link path="/" styleAs="link" text="Cancel" />.
+              Not ready yet? <Link path="/" styleAs="link" content="Cancel" />.
             </p>
           </>
         )}

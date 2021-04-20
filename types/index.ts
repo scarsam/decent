@@ -63,7 +63,7 @@ export interface IForm {
 }
 
 export interface ILink {
-  text: string;
+  content: string | React.ReactNode;
   path: string;
   styleAs: "button" | "link";
   size?: "regular" | "large";

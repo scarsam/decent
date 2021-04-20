@@ -39,7 +39,7 @@ export default function Home() {
           }
           path="/"
           styleAs="link"
-          text="Sign Out"
+          content="Sign Out"
         />
         .
       </p>

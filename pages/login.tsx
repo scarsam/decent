@@ -68,7 +68,7 @@ const Login: React.VFC = () => {
               helperText={
                 <p>
                   Can't remember?{" "}
-                  <Link path="/" styleAs="link" text="Let's reset it" />.
+                  <Link path="/" styleAs="link" content="Let's reset it" />.
                 </p>
               }
             />
