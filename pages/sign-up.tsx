@@ -60,7 +60,7 @@ const Signup: React.VFC = () => {
         <title>Decent | Sign up - Sam Ojling</title>
         <link rel="icon" href="/decent-favicon.png" />
       </Head>
-      <h1 className="text-5xl mb-10">Sign Up</h1>
+      <h1 className="text-5xl mb-10 text-primary">Sign Up</h1>
       <Form
         handleSubmit={onSubmit}
         initalValues={initalValues}

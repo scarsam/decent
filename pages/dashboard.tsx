@@ -26,7 +26,7 @@ export default function Home() {
         <title>Decent | Dashboard - Sam Ojling</title>
         <link rel="icon" href="/decent-favicon.png" />
       </Head>
-      <h1 className="text-5xl mb-10">Member Portal</h1>
+      <h1 className="text-5xl mb-10 text-primary">Member Portal</h1>
       <Notification message="Yay! Welcome to Decent!" autoDeleteTime={5000} />
       <p>
         Hi {user?.email} you're in! Unless you want to{" "}

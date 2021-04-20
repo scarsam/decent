@@ -10,6 +10,9 @@ module.exports = {
       backgroundImage: () => ({
         "hero-pattern": "url('/decent-bg.svg')",
       }),
+      backgroundSize: {
+        "50%": "50%",
+      },
       colors: {
         primary: "#29366e",
         "primary-dark": "#1a1a59",

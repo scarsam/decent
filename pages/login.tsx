@@ -39,7 +39,7 @@ const Login: React.VFC = () => {
         <title>Decent | Login - Sam Ojling</title>
         <link rel="icon" href="/decent-favicon.png" />
       </Head>
-      <h1 className="text-5xl mb-10">Sign In</h1>
+      <h1 className="text-5xl mb-10 text-primary">Sign In</h1>
       <Form
         handleSubmit={onSubmit}
         initalValues={initalValues}
