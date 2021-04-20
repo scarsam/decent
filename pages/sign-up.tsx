@@ -2,7 +2,6 @@ import { FormikValues } from "formik";
 import { sessionValidationSchema } from "../validation/sessionValidation";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { useUserStore } from "../store/user";
 import api from "../utils/api";
 import Button from "../components/Button";
 import Form from "../components/Form";
@@ -10,6 +9,7 @@ import Head from "next/head";
 import ServerError from "../components/ServerError";
 import TextField from "../components/TextField";
 import PageLayout from "../layout/PageLayout";
+import Link from "../components/Link";
 
 const initalValues = {
   email: "",
@@ -18,7 +18,6 @@ const initalValues = {
 
 const Signup: React.VFC = () => {
   const [error, setError] = useState<string | null>(null);
-  const { updateUser } = useUserStore();
   const router = useRouter();
 
   const onSubmit = async (values: FormikValues) => {
@@ -37,6 +36,7 @@ const Signup: React.VFC = () => {
         <title>Decent | Sign up - Sam Ojling</title>
         <link rel="icon" href="/decent-favicon.png" />
       </Head>
+      <h1 className="text-5xl mb-10">Sign Up</h1>
       <Form
         handleSubmit={onSubmit}
         initalValues={initalValues}
@@ -48,7 +48,7 @@ const Signup: React.VFC = () => {
               type="email"
               name="email"
               placeholder="Email"
-              label="Email"
+              label="What is your email address?"
               isInvalid={touched.email && errors.email}
               errorMessage={errors.email}
             />
@@ -57,12 +57,17 @@ const Signup: React.VFC = () => {
               type="password"
               name="password"
               placeholder="Password"
-              label="Password"
+              label="Please create a strong password:"
               isInvalid={touched.password && errors.password}
               errorMessage={errors.password}
             />
 
-            <Button>Sign up</Button>
+            <span className="mt-4 mb-2 block">
+              <Button>Create my account</Button>
+            </span>
+            <p>
+              Not ready yet? <Link path="/" styleAs="link" text="Cancel" />.
+            </p>
           </>
         )}
       />

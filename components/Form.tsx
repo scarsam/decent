@@ -14,7 +14,7 @@ const Form: React.VFC<IForm> = ({
       validationSchema={validationSchema}
     >
       {({ errors, touched }) => (
-        <FormikForm className="w-full md:w-64">
+        <FormikForm className="w-full md:w-96">
           {render(errors, touched)}
         </FormikForm>
       )}

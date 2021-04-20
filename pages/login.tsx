@@ -10,6 +10,7 @@ import Head from "next/head";
 import ServerError from "../components/ServerError";
 import TextField from "../components/TextField";
 import PageLayout from "../layout/PageLayout";
+import Link from "../components/Link";
 
 const initalValues = {
   email: "",
@@ -18,20 +19,11 @@ const initalValues = {
 
 const Login: React.VFC = () => {
   const [error, setError] = useState<string | null>(null);
-  const { updateUser } = useUserStore();
   const router = useRouter();
 
   const onSubmit = async (values: FormikValues) => {
     try {
-      const result = await api("/login", "POST", values);
-      updateUser({
-        id: "1",
-        name: "Monkey",
-        team: "Admins",
-        email: result?.email,
-        password: result?.password,
-        ...values,
-      });
+      const result = await api("/login", values);
       setError(null);
       router.push("/");
     } catch (err) {
@@ -45,7 +37,7 @@ const Login: React.VFC = () => {
         <title>Decent | Login - Sam Ojling</title>
         <link rel="icon" href="/decent-favicon.png" />
       </Head>
-
+      <h1 className="text-5xl mb-10">Sign In</h1>
       <Form
         handleSubmit={onSubmit}
         initalValues={initalValues}
@@ -69,8 +61,15 @@ const Login: React.VFC = () => {
               label="Password"
               isInvalid={touched.password && errors.password}
               errorMessage={errors.password}
+              helperText={
+                <p>
+                  Can't remember?{" "}
+                  <Link path="/" styleAs="link" text="Let's reset it" />.
+                </p>
+              }
             />
-            <Button>Login</Button>
+
+            <Button>Let me in</Button>
           </>
         )}
       />

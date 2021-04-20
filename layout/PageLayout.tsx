@@ -1,6 +1,13 @@
-const PageLayout: React.FC = ({ children }) => {
+const PageLayout: React.FC<{ center?: boolean }> = ({
+  children,
+  center = false,
+}) => {
   return (
-    <div className="flex flex-col items-center px-10 pt-20 sm:pt-40">
+    <div
+      className={`flex flex-col px-14 pt-20 sm:pt-32 ${
+        center ? "items-center" : ""
+      }`}
+    >
       {children}
     </div>
   );

@@ -1,5 +1,5 @@
 const Layout: React.FC = ({ children }) => {
-  return <main>{children}</main>;
+  return <main className="antialiased">{children}</main>;
 };
 
 export default Layout;
