@@ -11,6 +11,13 @@ import React from "react";
 export type UserValidationTypes = typeof userValidationSchema;
 export type SessionValidationTypes = typeof sessionValidationSchema;
 
+export interface IPassword {
+  minLength: boolean;
+  hasNumber: boolean;
+  hasLowerCase: boolean;
+  hasUpperCase: boolean;
+}
+
 export interface IUser {
   id: string;
   email: string;
@@ -28,8 +35,9 @@ export interface ITextField {
   name: string;
   placeholder: string;
   isInvalid: string | false | undefined;
-  errorMessage: string | undefined;
+  errorMessage?: string | undefined;
   helperText?: React.ReactNode;
+  validate?: (value: any) => { error: string } | void;
 }
 
 export interface IForm {
@@ -37,7 +45,7 @@ export interface IForm {
     values: FormikValues,
     helpers: FormikHelpers<FormikValues>,
   ) => void;
-  validationSchema: UserValidationTypes | SessionValidationTypes;
+  validationSchema?: UserValidationTypes | SessionValidationTypes;
   initalValues: {
     [key: string]: string | string[];
   };

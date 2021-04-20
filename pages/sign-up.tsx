@@ -10,6 +10,7 @@ import ServerError from "../components/ServerError";
 import TextField from "../components/TextField";
 import PageLayout from "../layout/PageLayout";
 import Link from "../components/Link";
+import PasswordRequirements from "../components/PasswordRequirements";
 
 const initalValues = {
   email: "",
@@ -17,8 +18,26 @@ const initalValues = {
 };
 
 const Signup: React.VFC = () => {
+  const [minLength, setMinLength] = useState(false);
+  const [hasNumber, setHasNumber] = useState(false);
+  const [hasLowerCase, setHasLowerCase] = useState(false);
+  const [hasUpperCase, setHasUpperCase] = useState(false);
+
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+
+  const validatePassword = (password) => {
+    let error;
+    password.length >= 8 ? setMinLength(true) : setMinLength(false);
+    password.match(/[a-z]+/) ? setHasLowerCase(true) : setHasLowerCase(false);
+    password.match(/[A-Z]+/) ? setHasUpperCase(true) : setHasUpperCase(false);
+    password.match(/\d+/) ? setHasNumber(true) : setHasNumber(false);
+
+    if (!minLength || !hasNumber || !hasLowerCase || !hasUpperCase) {
+      error = "Required";
+      return error;
+    }
+  };
 
   const onSubmit = async (values: FormikValues) => {
     try {
@@ -59,7 +78,15 @@ const Signup: React.VFC = () => {
               placeholder="Password"
               label="Please create a strong password:"
               isInvalid={touched.password && errors.password}
-              errorMessage={errors.password}
+              validate={validatePassword}
+              helperText={
+                <PasswordRequirements
+                  minLength={minLength}
+                  hasNumber={hasNumber}
+                  hasLowerCase={hasLowerCase}
+                  hasUpperCase={hasUpperCase}
+                />
+              }
             />
 
             <span className="mt-4 mb-2 block">

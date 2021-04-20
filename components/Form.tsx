@@ -5,12 +5,14 @@ const Form: React.VFC<IForm> = ({
   handleSubmit,
   initalValues,
   validationSchema,
+  validate,
   render,
 }) => {
   return (
     <Formik
       initialValues={initalValues}
       onSubmit={handleSubmit}
+      validate={validate}
       validationSchema={validationSchema}
     >
       {({ errors, touched }) => (
