@@ -49,7 +49,7 @@ export interface IForm {
     values: FormikValues,
     helpers: FormikHelpers<FormikValues>,
   ) => void;
-  validationSchema?: UserValidationTypes | SessionValidationTypes;
+  validationSchema?: SessionValidationTypes;
   initalValues: {
     [key: string]: string | string[];
   };
