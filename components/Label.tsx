@@ -4,7 +4,7 @@ const Label: React.FC<{ label: string; id: string }> = ({
   id,
 }) => {
   return (
-    <label className="relative flex flex-col mb-4" htmlFor={id}>
+    <label className="relative flex flex-col mb-8" htmlFor={id}>
       <p className="font-semibold pb-1">
         {label}
         <span className="text-red-600 pl-1">*</span>

@@ -9,7 +9,7 @@ const Button: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>> = ({
   return (
     <button
       className={
-        "bg-primary text-white rounded-full font-semibold tracking-wide px-6 py-2 text-md"
+        "bg-primary text-white rounded-full font-semibold px-6 py-2 text-md uppercase tracking-wider hover:bg-primary-dark transition-colors"
       }
       {...props}
       disabled={isSubmitting || !isValid}

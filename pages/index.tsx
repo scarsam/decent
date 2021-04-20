@@ -16,15 +16,17 @@ export default function Home() {
   }, []);
 
   return (
-    <PageLayout>
+    <PageLayout center>
       <Head>
         <title>Decent | Sam Ojling</title>
         <link rel="icon" href="/decent-favicon.png" />
       </Head>
 
-      <h1 className="text-5xl mb-10">Decent Healthcare for Tech Freelancers</h1>
+      <h1 className="text-5xl mb-10 ">
+        Decent Healthcare for Tech Freelancers
+      </h1>
       <Link size="large" path="/sign-up" styleAs="button" text="Sign Up" />
-      <p className="mt-2 mb-10">
+      <p className="mt-2 mb-16">
         Already have an account?{" "}
         <Link path="/login" styleAs="link" text="Sign In" />
       </p>
@@ -34,7 +36,7 @@ export default function Home() {
         styleAs="button"
         text="Join our Telegram"
       />
-      <ul className="flex uppercase divide-x-2 divide-gray-600 text-md align-middle mt-5">
+      <ul className="flex uppercase divide-x-2 divide-gray-600 text-md align-middle mt-8">
         <li className="px-2">
           <Link
             path="https://www.decent.com/about-us"
