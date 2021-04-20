@@ -22,8 +22,8 @@ export default function Home() {
         <link rel="icon" href="/decent-favicon.png" />
       </Head>
 
-      <h1 className="text-5xl mb-10 ">
-        Decent Healthcare for Tech Freelancers
+      <h1 className="text-4xl md:text-5xl mb-10 text-center">
+        Decent Healthcare for <span className="lg:block">Tech Freelancers</span>
       </h1>
       <Link size="large" path="/sign-up" styleAs="button" text="Sign Up" />
       <p className="mt-2 mb-16">

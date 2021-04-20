@@ -12,7 +12,7 @@ const Link: React.VFC<ILink> = ({ text, path, styleAs, size }) => {
   if (isButton) {
     buttonSize =
       size === "large" && isButton
-        ? "px-8 py-4 text-2xl"
+        ? "px-8 py-4 text-xl"
         : "px-4 py-2 text-sm uppercase";
   }
 

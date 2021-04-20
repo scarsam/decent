@@ -7,6 +7,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      backgroundImage: () => ({
+        "hero-pattern": "url('/decent-bg.svg')",
+      }),
       colors: {
         primary: "#29366e",
         "primary-dark": "#1a1a59",
