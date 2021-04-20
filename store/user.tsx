@@ -1,12 +1,12 @@
 import React, { useState, createContext, useContext } from "react";
-import { IUserContext } from "../types";
+import { IUserContext, IUser } from "../types";
 
 const contextDefaultValues: IUserContext = {
   user: {
-    id: "",
     email: "",
     password: "",
   },
+  updateUser: () => {},
 };
 
 export const UserContext = createContext<IUserContext>(contextDefaultValues);
@@ -16,10 +16,17 @@ export const { Provider: UserProviderTest } = UserContext;
 const UserProvider: React.FC = ({ children }) => {
   const [store, updateStore] = useState(contextDefaultValues);
 
+  const updateUser = (updatedUser: Partial<IUser>) =>
+    updateStore((prevState) => ({
+      ...prevState,
+      user: { ...prevState.user, ...updatedUser },
+    }));
+
   return (
     <UserContext.Provider
       value={{
         user: store.user,
+        updateUser,
       }}
     >
       {children}
@@ -28,9 +35,9 @@ const UserProvider: React.FC = ({ children }) => {
 };
 
 export const useUserStore = () => {
-  const { user } = useContext(UserContext);
+  const { user, updateUser } = useContext(UserContext);
 
-  return { user };
+  return { user, updateUser };
 };
 
 export default UserProvider;

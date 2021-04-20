@@ -1,5 +1,5 @@
 import { FormikValues } from "formik";
-import { sessionValidationSchema } from "../validation/sessionValidation";
+import { signupValidationSchema } from "../validation/sessionValidation";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import api from "../utils/api";
@@ -61,7 +61,7 @@ const Signup: React.VFC = () => {
       <Form
         handleSubmit={onSubmit}
         initalValues={initalValues}
-        validationSchema={sessionValidationSchema}
+        validationSchema={signupValidationSchema}
         render={(errors, touched, handleChange) => (
           <>
             {error && <ServerError message={error} />}

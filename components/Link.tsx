@@ -1,7 +1,7 @@
 import NavLink from "next/link";
 import { ILink } from "../types";
 
-const Link: React.VFC<ILink> = ({ text, path, styleAs, size }) => {
+const Link: React.VFC<ILink> = ({ text, path, styleAs, size, onClick }) => {
   let buttonSize;
   const isButton = styleAs === "button";
 
@@ -18,7 +18,9 @@ const Link: React.VFC<ILink> = ({ text, path, styleAs, size }) => {
 
   return (
     <NavLink href={path}>
-      <a className={`${styles} ${buttonSize}`}>{text}</a>
+      <a onClick={onClick} className={`${styles} ${buttonSize}`}>
+        {text}
+      </a>
     </NavLink>
   );
 };

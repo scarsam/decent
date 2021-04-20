@@ -19,13 +19,13 @@ export interface IPassword {
 }
 
 export interface IUser {
-  id: string;
   email: string;
   password: string;
 }
 
 export interface IUserContext {
   user: IUser;
+  updateUser: (user: Partial<IUser>) => void;
 }
 
 export interface ITextField {
@@ -62,6 +62,7 @@ export interface ILink {
   path: string;
   styleAs: "button" | "link";
   size?: "regular" | "large";
+  onClick?: (value: any) => void;
 }
 
 export interface ILayout {

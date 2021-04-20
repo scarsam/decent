@@ -6,15 +6,11 @@ export const makeServer = () => {
       this.post("/login", (_, request) => {
         let user = JSON.parse(request.requestBody);
 
-        if (user.password !== "Password123") {
+        if (user.email !== "sam@ojling.com" && user.password !== "Password1") {
           return new Response(
             403,
-            { some: "header" },
-            {
-              errors: [
-                "Oops! Either your email or password was incorrect. Please try again!",
-              ],
-            },
+            {},
+            "Oops! Either your email or password was incorrect. Please try again!",
           );
         }
 
