@@ -13,10 +13,10 @@ function MyApp({ Component, pageProps }) {
   return (
     <UserProviderWrapper>
       <Layout>
-        <Container background>
+        <Container>
           <TopBar />
         </Container>
-        <Container>
+        <Container height>
           <Component {...pageProps} />
         </Container>
       </Layout>

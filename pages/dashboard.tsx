@@ -29,7 +29,7 @@ export default function Home() {
       <h1 className="text-5xl mb-10 text-primary">Member Portal</h1>
       <Notification message="Yay! Welcome to Decent!" autoDeleteTime={5000} />
       <p>
-        Hi {user?.email} you're in! Unless you want to{" "}
+        Hi <strong>{user?.email}</strong> you're in! Unless you want to{" "}
         <Link
           onClick={() =>
             updateUser({

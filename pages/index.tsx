@@ -10,7 +10,7 @@ export default function Home() {
   const { user } = useUserStore();
 
   useEffect(() => {
-    if (user?.id) {
+    if (user?.email) {
       router.push("/dashboard");
     }
   }, []);

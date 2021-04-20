@@ -1,8 +1,8 @@
 import { ILayout } from "../types";
 
-const Container: React.FC<ILayout> = ({ children, background = false }) => {
+const Container: React.FC<ILayout> = ({ children, height = false }) => {
   return (
-    <section>
+    <section className={`${height ? "flex-grow" : ""}`}>
       <div className="container m-auto w-full">{children}</div>
     </section>
   );

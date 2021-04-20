@@ -71,5 +71,5 @@ export interface ILink {
 }
 
 export interface ILayout {
-  background?: boolean;
+  height?: boolean;
 }
