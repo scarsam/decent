@@ -6,7 +6,7 @@ import PageLayout from "../layout/PageLayout";
 import Link from "../components/Link";
 import Notification from "../components/Notification";
 
-export default function Home() {
+export default function Dashboard() {
   const router = useRouter();
   const { user, updateUser } = useUserStore();
 

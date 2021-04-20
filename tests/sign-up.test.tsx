@@ -1,6 +1,6 @@
 import { render as r, fireEvent, waitFor } from "@testing-library/react";
 import api from "../utils/api";
-import Dashboard from "../pages/dashboard";
+import Signup from "../pages/sign-up";
 import { UserProviderTest } from "../store/user";
 import { useRouter } from "next/router";
 import { IUserContext } from "../types";
@@ -10,10 +10,10 @@ jest.mock("next/router", () => ({
   useRouter: jest.fn(),
 }));
 
-describe("Dashboard", () => {
+describe("Sign Up", () => {
   let mockRouter;
 
-  const render = (id = "") => {
+  const render = () => {
     const Store = ({ children }) => {
       const context: IUserContext = {
         user: {
@@ -28,7 +28,7 @@ describe("Dashboard", () => {
 
     return r(
       <Store>
-        <Dashboard />
+        <Signup />
       </Store>,
     );
   };
@@ -42,14 +42,15 @@ describe("Dashboard", () => {
   });
 
   it("displays the correct form", async () => {
-    const { getByLabelText } = render("1");
+    const { getByPlaceholderText, getByText } = render();
 
-    expect(getByLabelText("Password")).toBeInTheDocument();
-    expect(getByLabelText("Email")).toBeInTheDocument();
+    expect(getByPlaceholderText("Password")).toBeInTheDocument();
+    expect(getByPlaceholderText("Email")).toBeInTheDocument();
+    expect(getByText("1 UPPERCASE letter")).toBeInTheDocument();
   });
 
   it("validates the form", async () => {
-    const { getByText, getByPlaceholderText } = render("1");
+    const { getByText, getByPlaceholderText } = render();
 
     const emailInput = getByPlaceholderText("Email");
     const passwordInput = getByPlaceholderText("Password");
@@ -58,8 +59,8 @@ describe("Dashboard", () => {
     fireEvent.blur(passwordInput);
 
     await waitFor(() => {
-      expect(getByText("Password required")).toBeInTheDocument();
       expect(getByText("Email required")).toBeInTheDocument();
+      expect(getByText("Between 8 - 30 characters")).toBeInTheDocument();
     });
 
     fireEvent.change(passwordInput, {
@@ -70,15 +71,13 @@ describe("Dashboard", () => {
     });
 
     await waitFor(() => {
-      expect(
-        getByText("password must be at least 6 characters"),
-      ).toBeInTheDocument();
+      expect(getByText("Between 8 - 30 characters")).toBeInTheDocument();
       expect(getByText("email must be a valid email")).toBeInTheDocument();
     });
   });
 
   it("submits the data", async () => {
-    const { getByText, getByPlaceholderText, getByLabelText } = render("5");
+    const { getByText, getByPlaceholderText } = render();
 
     const emailInput = getByPlaceholderText("Email");
     const passwordInput = getByPlaceholderText("Password");
@@ -90,33 +89,31 @@ describe("Dashboard", () => {
       target: { value: "sam@ojling.com" },
     });
     fireEvent.change(passwordInput, {
-      target: { value: "123456" },
+      target: { value: "Password123" },
     });
 
-    const button = getByText("Save");
+    const button = getByText("Create my account");
     expect(button).toBeInTheDocument();
 
     fireEvent.click(button);
 
     await waitFor(() => {
-      expect(fetchMock.mock.calls[0][0]).toEqual("/api/update/5");
+      expect(fetchMock.mock.calls[0][0]).toEqual("/sign-up");
     });
   });
 
   it("submits the form correctly", async () => {
     const formData = {
-      id: "5",
       email: "test@test.com",
-      password: "123456",
+      password: "Password12345",
     };
 
     fetchMock.mockResponseOnce(JSON.stringify(formData));
 
-    api("/update/5", formData).then((data) => {
+    api("/sign-up", formData).then((data) => {
       expect(data).toEqual({
-        id: "5",
         email: "test@test.com",
-        password: "123456",
+        password: "Password12345",
       });
     });
   });

@@ -36,10 +36,10 @@ describe("Login", () => {
   });
 
   it("displays the correct form", async () => {
-    const { getByLabelText } = render();
+    const { getByPlaceholderText } = render();
 
-    expect(getByLabelText("Password")).toBeInTheDocument();
-    expect(getByLabelText("Email")).toBeInTheDocument();
+    expect(getByPlaceholderText("Password")).toBeInTheDocument();
+    expect(getByPlaceholderText("Email")).toBeInTheDocument();
   });
 
   it("validates the form", async () => {
@@ -52,14 +52,14 @@ describe("Login", () => {
     fireEvent.blur(passwordInput);
 
     await waitFor(() => {
-      expect(getByText("Password required")).toBeInTheDocument();
       expect(getByText("Email required")).toBeInTheDocument();
+      expect(getByText("Please Enter your password")).toBeInTheDocument();
     });
   });
 
   it("submits and redirects you", async () => {
     fetchMock.mockResponseOnce(
-      JSON.stringify({ email: "sam@ojling.com", password: "123456" }),
+      JSON.stringify({ email: "sam@ojling.com", password: "Password1" }),
     );
 
     const mockRouter = {
@@ -79,16 +79,16 @@ describe("Login", () => {
       target: { value: "sam@ojling.com" },
     });
     fireEvent.change(passwordInput, {
-      target: { value: "123456" },
+      target: { value: "Password1" },
     });
 
-    const button = getByText("Login");
+    const button = getByText("Let me in");
     expect(button).toBeInTheDocument();
 
     fireEvent.click(button);
 
     await waitFor(() => {
-      expect(mockRouter.push).toHaveBeenCalledWith("/");
+      expect(mockRouter.push).toHaveBeenCalledWith("/dashboard");
     });
   });
 
@@ -100,6 +100,6 @@ describe("Login", () => {
       expect(data).toEqual({ email: "sam@ojling.com", password: "123456" });
     });
 
-    expect(fetchMock.mock.calls[0][0]).toEqual("/api/login");
+    expect(fetchMock.mock.calls[0][0]).toEqual("/login");
   });
 });
