@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap");
 
 .form-border {
   box-shadow: inset 0 -100px 0 -99px #919197;
@@ -16,5 +16,5 @@
 
 body,
 html {
-  font-family: "Inter", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }

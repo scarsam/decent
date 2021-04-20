@@ -6,6 +6,7 @@ import {
   FormikValues,
   FormikHelpers,
 } from "formik";
+import React from "react";
 
 export type UserValidationTypes = typeof userValidationSchema;
 export type SessionValidationTypes = typeof sessionValidationSchema;
@@ -28,6 +29,7 @@ export interface ITextField {
   placeholder: string;
   isInvalid: string | false | undefined;
   errorMessage: string | undefined;
+  helperText?: React.ReactNode;
 }
 
 export interface IForm {
@@ -48,6 +50,8 @@ export interface IForm {
 export interface ILink {
   text: string;
   path: string;
+  styleAs: "button" | "link";
+  size?: "regular" | "large";
 }
 
 export interface ILayout {

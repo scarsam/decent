@@ -5,7 +5,13 @@ module.exports = {
     "./layout/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: false, // or 'media' or 'class'
-  theme: {},
+  theme: {
+    extend: {
+      colors: {
+        primary: "#29366e",
+      },
+    },
+  },
   variants: {
     extend: { opacity: ["disabled"] },
   },
