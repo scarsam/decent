@@ -12,7 +12,7 @@ export type UserValidationTypes = typeof userValidationSchema;
 export type SessionValidationTypes = typeof sessionValidationSchema;
 
 export interface IPassword {
-  minLength: boolean;
+  hasLength: boolean;
   hasNumber: boolean;
   hasLowerCase: boolean;
   hasUpperCase: boolean;
@@ -38,6 +38,7 @@ export interface ITextField {
   errorMessage?: string | undefined;
   helperText?: React.ReactNode;
   validate?: (value: any) => { error: string } | void;
+  handleChange: (e: React.ChangeEvent<any>) => void;
 }
 
 export interface IForm {
@@ -52,6 +53,7 @@ export interface IForm {
   render: (
     errors: FormikErrors<{ [key: string]: string }>,
     touched: FormikTouched<{ [key: string]: string }>,
+    handleChange: (e: React.ChangeEvent<any>) => void,
   ) => React.ReactNode;
 }
 

@@ -18,7 +18,7 @@ const initalValues = {
 };
 
 const Signup: React.VFC = () => {
-  const [minLength, setMinLength] = useState(false);
+  const [hasLength, setHasLength] = useState(false);
   const [hasNumber, setHasNumber] = useState(false);
   const [hasLowerCase, setHasLowerCase] = useState(false);
   const [hasUpperCase, setHasUpperCase] = useState(false);
@@ -28,12 +28,14 @@ const Signup: React.VFC = () => {
 
   const validatePassword = (password) => {
     let error;
-    password.length >= 8 ? setMinLength(true) : setMinLength(false);
+    password.length >= 8 && password.length <= 20
+      ? setHasLength(true)
+      : setHasLength(false);
     password.match(/[a-z]+/) ? setHasLowerCase(true) : setHasLowerCase(false);
     password.match(/[A-Z]+/) ? setHasUpperCase(true) : setHasUpperCase(false);
     password.match(/\d+/) ? setHasNumber(true) : setHasNumber(false);
 
-    if (!minLength || !hasNumber || !hasLowerCase || !hasUpperCase) {
+    if (!hasLength || !hasNumber || !hasLowerCase || !hasUpperCase) {
       error = "Required";
       return error;
     }
@@ -60,7 +62,7 @@ const Signup: React.VFC = () => {
         handleSubmit={onSubmit}
         initalValues={initalValues}
         validationSchema={sessionValidationSchema}
-        render={(errors, touched) => (
+        render={(errors, touched, handleChange) => (
           <>
             {error && <ServerError message={error} />}
             <TextField
@@ -69,6 +71,7 @@ const Signup: React.VFC = () => {
               placeholder="Email"
               label="What is your email address?"
               isInvalid={touched.email && errors.email}
+              handleChange={handleChange}
               errorMessage={errors.email}
             />
 
@@ -79,9 +82,10 @@ const Signup: React.VFC = () => {
               label="Please create a strong password:"
               isInvalid={touched.password && errors.password}
               validate={validatePassword}
+              handleChange={handleChange}
               helperText={
                 <PasswordRequirements
-                  minLength={minLength}
+                  hasLength={hasLength}
                   hasNumber={hasNumber}
                   hasLowerCase={hasLowerCase}
                   hasUpperCase={hasUpperCase}

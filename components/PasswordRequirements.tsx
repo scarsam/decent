@@ -1,7 +1,7 @@
 import { IPassword } from "../types";
 
 const PasswordRequirements: React.VFC<IPassword> = ({
-  minLength,
+  hasLength,
   hasNumber,
   hasLowerCase,
   hasUpperCase,
@@ -10,8 +10,8 @@ const PasswordRequirements: React.VFC<IPassword> = ({
     <>
       <p className="text-sm font-semibold">Must have:</p>
       <ul className="text-sm">
-        <li className={`${minLength ? "text-green-500" : "text-red-500"}`}>
-          8 characters
+        <li className={`${hasLength ? "text-green-500" : "text-red-500"}`}>
+          Between 8 - 30 characters
         </li>
         <li className={`${hasUpperCase ? "text-green-500" : "text-red-500"}`}>
           1 UPPERCASE letter
