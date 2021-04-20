@@ -2,6 +2,7 @@ import { FormikValues } from "formik";
 import { signupValidationSchema } from "../validation/sessionValidation";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useUserStore } from "../store/user";
 import api from "../utils/api";
 import Button from "../components/Button";
 import Form from "../components/Form";
@@ -18,6 +19,7 @@ const initalValues = {
 };
 
 const Signup: React.VFC = () => {
+  const { updateUser } = useUserStore();
   const [hasLength, setHasLength] = useState(false);
   const [hasNumber, setHasNumber] = useState(false);
   const [hasLowerCase, setHasLowerCase] = useState(false);
@@ -44,8 +46,9 @@ const Signup: React.VFC = () => {
   const onSubmit = async (values: FormikValues) => {
     try {
       const result = await api("/sign-up", values);
+      updateUser({ ...result?.user });
       setError(null);
-      router.push("/");
+      router.push("/dashboard");
     } catch (err) {
       setError(err?.message);
     }

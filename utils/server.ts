@@ -17,8 +17,16 @@ export const makeServer = () => {
         return { user };
       });
 
-      this.post("/signup", (_, request) => {
+      this.post("/sign-up", (_, request) => {
         let user = JSON.parse(request.requestBody);
+
+        if (user.email === "sam@ojling.com") {
+          return new Response(
+            403,
+            {},
+            "Oops! Looks like the email is already taken.",
+          );
+        }
 
         return { user };
       });
