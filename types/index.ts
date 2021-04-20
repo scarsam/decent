@@ -1,4 +1,7 @@
-import { sessionValidationSchema } from "../validation/sessionValidation";
+import {
+  sessionValidationSchema,
+  signupValidationSchema,
+} from "../validation/sessionValidation";
 import {
   FormikTouched,
   FormikErrors,
@@ -8,6 +11,7 @@ import {
 import React from "react";
 
 export type SessionValidationTypes = typeof sessionValidationSchema;
+export type SignupValidationTypes = typeof signupValidationSchema;
 
 export interface INotification {
   message: string;
@@ -49,7 +53,7 @@ export interface IForm {
     values: FormikValues,
     helpers: FormikHelpers<FormikValues>,
   ) => void;
-  validationSchema?: SessionValidationTypes;
+  validationSchema?: SessionValidationTypes | SignupValidationTypes;
   initalValues: {
     [key: string]: string | string[];
   };
