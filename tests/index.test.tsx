@@ -17,10 +17,10 @@ describe("Dashboard", () => {
     const Store = ({ children }) => {
       const context: IUserContext = {
         user: {
-          id,
           email: "",
           password: "",
         },
+        updateUser: () => {},
       };
 
       return <UserProviderTest value={context}>{children}</UserProviderTest>;

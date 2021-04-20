@@ -5,9 +5,8 @@ import UserProviderWrapper from "../store/user";
 import { makeServer } from "../utils/server";
 import "../styles/globals.css";
 
-if (process.env.NODE_ENV === "development") {
-  makeServer();
-}
+// This should not run in product - only for testing / development
+makeServer();
 
 function MyApp({ Component, pageProps }) {
   return (

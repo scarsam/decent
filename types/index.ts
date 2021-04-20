@@ -1,4 +1,3 @@
-import { userValidationSchema } from "../validation/userValidation";
 import { sessionValidationSchema } from "../validation/sessionValidation";
 import {
   FormikTouched,
@@ -8,7 +7,6 @@ import {
 } from "formik";
 import React from "react";
 
-export type UserValidationTypes = typeof userValidationSchema;
 export type SessionValidationTypes = typeof sessionValidationSchema;
 
 export interface INotification {
